@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/userguide3/general/controllers.html
  */
+#[\AllowDynamicProperties]
 class CI_Controller {
 
 	/**
@@ -80,6 +81,9 @@ class CI_Controller {
 		// so that CI can run as one big super object.
 		foreach (is_loaded() as $var => $class)
 		{
+			// Direct assignment is OK because #[AllowDynamicProperties] is
+			// declared on this class. PHP 8.3 creates the property on the
+			// instance, which is then visible to get_object_vars().
 			$this->$var =& load_class($class);
 		}
 

@@ -134,3 +134,143 @@ h2.section-title {
   .sidebar { position: fixed; z-index: 1050; width: 240px; height: 100vh; }
   .main-content { margin-left: 0 !important; }
 }
+
+/* ============================================
+   Media Management Card Styles
+   ============================================ */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.media-card {
+  background: var(--surface-card);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.media-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  overflow: hidden;
+}
+
+.media-thumb img,
+.media-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-badge {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.video-badge i {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.media-info {
+  padding: 0.75rem;
+}
+
+.media-title {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary);
+}
+
+.media-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.media-meta span {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.media-actions {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.media-card:hover .media-actions {
+  opacity: 1;
+}
+
+.media-actions .btn {
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface-bg);
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--accent-blue);
+  background: rgba(46, 111, 242, 0.05);
+}
+
+.upload-zone i {
+  font-size: 2rem;
+  color: var(--text-secondary);
+}
+
+.upload-zone p {
+  margin: 0.5rem 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.alert-success-flash {
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

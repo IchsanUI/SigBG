@@ -42,14 +42,28 @@ Checklist ini disusun bertahap (fase demi fase) supaya bisa dikerjakan increment
 
 ## Fase 3 — Manajemen Media
 
-- [ ] Form upload media (image & video)
-- [ ] Validasi tipe file & ukuran maksimal
-- [ ] Input durasi tayang (khusus image), validasi min 3 detik
-- [ ] Simpan file ke folder + insert record ke DB
-- [ ] List media (tabel/grid dengan thumbnail)
+- [x] Form upload media (image & video)
+- [x] Validasi tipe file & ukuran maksimal
+- [x] Input durasi tayang (khusus image), validasi min 3 detik
+- [x] Simpan file ke folder + insert record ke DB
+- [x] List media (tabel/grid dengan thumbnail)
 - [ ] Fitur edit media (ganti judul/durasi, tanpa perlu re-upload)
-- [ ] Fitur hapus media (soft delete)
-- [ ] Preview media langsung dari list (modal image/video)
+- [x] Fitur hapus media (soft delete)
+- [x] Preview media langsung dari list (modal image/video)
+
+### Hasil Testing Fase 3
+
+| Endpoint                | Method | Status | Catatan                                       |
+| ----------------------- | ------ | ------ | --------------------------------------------- |
+| `/media`                | GET    | 200    | Menampilkan grid thumbnail + judul + ukuran   |
+| `/media/upload`         | POST   | 200    | JSON `{success, id, file_name, path, csrf...}` |
+| `/media/serve/{id}`     | GET    | 200    | Content-Type sesuai mime (image/png, dll)     |
+| `/media/serve_file/{f}` | GET    | 200    | Lookup by filename (fallback)                 |
+| `/media/delete/{id}`    | POST   | 200    | Soft-delete; `remove_file=1` hapus file fisik |
+
+### Bug Fix Selama Fase 3
+
+- `Media.php:110` — `$file_data['mime_type']` → `$file_data['file_type']` (key CI3 yang benar)
 
 ---
 

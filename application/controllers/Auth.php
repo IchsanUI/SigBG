@@ -7,7 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Admin_model');
-        $this->load->model('Login_attempts_model');
+        $this->load->model('Login_attempts_model', 'login_attempt_model');
         $this->load->library('form_validation');
         $this->load->helper(['form', 'url']);
 
@@ -28,13 +28,13 @@ class Auth extends CI_Controller
         $ip = $this->input->ip_address();
 
         // Cleanup old attempt records opportunistically
-        $this->login_attempts_model->cleanup_old_attempts();
+        $this->login_attempt_model->cleanup_old_attempts();
 
         // Lockout check
-        if ($this->login_attempts_model->is_locked($ip)) {
+        if ($this->login_attempt_model->is_locked($ip)) {
             $this->load->view('auth/login_view', [
                 'locked'      => TRUE,
-                'locked_secs' => $this->login_attempts_model->get_lockout_remaining($ip),
+                'locked_secs' => $this->login_attempt_model->get_lockout_remaining($ip),
             ]);
             return;
         }
@@ -63,11 +63,11 @@ class Auth extends CI_Controller
         $ip = $this->input->ip_address();
 
         // Re-check lockout (race condition safety)
-        if ($this->login_attempts_model->is_locked($ip)) {
+        if ($this->login_attempt_model->is_locked($ip)) {
             $this->load->view('auth/login_view', [
                 'error'       => 'Too many login attempts. Try again later.',
                 'locked'      => TRUE,
-                'locked_secs' => $this->login_attempts_model->get_lockout_remaining($ip),
+                'locked_secs' => $this->login_attempt_model->get_lockout_remaining($ip),
             ]);
             return;
         }
@@ -78,7 +78,7 @@ class Auth extends CI_Controller
         $user = $this->admin_model->verify_password($username, $password);
 
         if (!$user) {
-            $this->login_attempts_model->record_failed($ip);
+            $this->login_attempt_model->record_failed($ip);
             // Regenerate session to prevent fixation
             $this->session->sess_regenerate(FALSE);
 
@@ -89,7 +89,7 @@ class Auth extends CI_Controller
         }
 
         // Success: clear attempts, regenerate session id (full)
-        $this->login_attempts_model->clear_attempts($ip);
+        $this->login_attempt_model->clear_attempts($ip);
         $this->session->sess_regenerate(TRUE);
 
         $this->session->set_userdata([

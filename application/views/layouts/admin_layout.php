@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="">
+    <meta name="csrf-token" content="<?= $this->security->get_csrf_hash(); ?>">
     <title><?= isset($page_title) ? htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') . ' — ' : ''; ?>SigBG Admin</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css'); ?>">
 </head>
@@ -64,6 +64,11 @@
             <?php $this->load->view($content_view, isset($content_data) ? $content_data : []); ?>
         </main>
     </div>
+
+    <!-- CSRF hidden input for AJAX requests -->
+    <form id="csrfForm" style="display: none;">
+        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+    </form>
 
     <script src="<?= base_url('assets/vendor/bootstrap.bundle.min.js'); ?>"></script>
     <script src="<?= base_url('assets/js/admin.js'); ?>"></script>

@@ -262,18 +262,22 @@ class CI_Loader {
 
 		if (empty($name))
 		{
-			$name = $model;
+			$name = strtolower($model);
 		}
 
-		if (in_array($name, $this->_ci_models, TRUE))
+		// CI3 convention: model property is always lowercase, regardless of $name argument.
+		// The class file lookup uses $model (which is the proper case class name).
+		$_prop_name = strtolower($name);
+
+		if (in_array($_prop_name, $this->_ci_models, TRUE))
 		{
 			return $this;
 		}
 
 		$CI =& get_instance();
-		if (isset($CI->$name))
+		if (isset($CI->$_prop_name))
 		{
-			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
+			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$_prop_name);
 		}
 
 		if ($db_conn !== FALSE && ! class_exists('CI_DB', FALSE))
@@ -354,12 +358,14 @@ class CI_Loader {
 			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
 		}
 
-		$this->_ci_models[] = $name;
+		$this->_ci_models[] = $_prop_name;
 		$model = new $model();
-		$CI->$name = $model;
+		$CI->$_prop_name = $model;
 		log_message('info', 'Model "'.get_class($model).'" initialized');
 		return $this;
 	}
+
+	// NOTE: empty body kept intentionally above; the following method handles property naming
 
 	// --------------------------------------------------------------------
 
@@ -397,7 +403,8 @@ class CI_Loader {
 		$CI->db = '';
 
 		// Load the DB class
-		$CI->db =& DB($params, $query_builder);
+		$db_obj = DB($params, $query_builder);
+		$CI->db = $db_obj;
 		return $this;
 	}
 

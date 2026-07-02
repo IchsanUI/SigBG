@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Base Controller for admin pages.
- * Redirects unauthenticated users to login.
+ * - Redirects unauthenticated users to login
  */
 class MY_Controller extends CI_Controller
 {
