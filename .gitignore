@@ -1,0 +1,46 @@
+# ===========================================
+# SigBG - Digital Signage System
+# .gitignore - Do not commit sensitive or generated files
+# ===========================================
+
+# Uploaded media (large binary files)
+assets/uploads/media/*
+!assets/uploads/media/.gitkeep
+
+# Session files
+application/cache/*
+!application/cache/.gitkeep
+session_files/*
+*.sess
+
+# Log files (optional, keep if you want them tracked)
+application/logs/*
+!application/logs/.gitkeep
+
+# Environment-specific config (uncomment if you want to keep config in git)
+# application/config/config.php
+# application/config/database.php
+
+# Dependency manager / package files
+vendor/
+composer.lock
+node_modules/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Database dump (if you ever create one)
+*.sql
+!sql/database.sql
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+.cache/
