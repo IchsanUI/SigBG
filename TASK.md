@@ -31,12 +31,12 @@ Checklist ini disusun bertahap (fase demi fase) supaya bisa dikerjakan increment
 
 ## Fase 2 — Autentikasi Admin
 
-- [ ] Halaman login admin
-- [ ] Hashing password (bcrypt)
-- [ ] CSRF token protection
-- [ ] Session handling + regenerasi session ID
-- [ ] Brute-force protection (lockout berdasarkan IP, mengikuti pola project login sebelumnya)
-- [ ] Middleware/filter cek login untuk semua halaman admin
+- [x] Halaman login admin (`/auth`, `Auth` controller + `auth/login_view`)
+- [x] Hashing password (bcrypt) — `password_verify()` di `Admin_model`
+- [x] CSRF token protection — enabled di config + token di form login
+- [x] Session handling + regenerasi session ID — `sess_regenerate(TRUE)` on success
+- [x] Brute-force protection (lockout 5 attempts / 15 menit per IP) — `Login_attempts_model`
+- [x] Middleware/filter cek login — `MY_Controller` redirect ke `auth` jika belum login
 
 ---
 
