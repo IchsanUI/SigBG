@@ -1,0 +1,136 @@
+/* SigBG Admin Styles — per DESIGN_STYLE.md */
+
+@import url('../vendor/bootstrap.min.css');
+@import url('../vendor/bootstrap-icons.css');
+@import url('../vendor/jakarta-font.css');
+
+:root {
+  --primary-navy: #1B2A4A;
+  --accent-blue: #2E6FF2;
+  --surface-bg: #F5F7FA;
+  --surface-card: #FFFFFF;
+  --text-primary: #1A1F2B;
+  --text-secondary: #6B7280;
+  --success: #1E9E5A;
+  --warning: #E0A527;
+  --danger: #D64545;
+  --border: #E2E6ED;
+}
+
+body.admin-body {
+  font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', sans-serif;
+  background: var(--surface-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+h1.page-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+h2.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.form-label, .small-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.badge-active { background: var(--success); color: #fff; }
+.badge-inactive { background: var(--text-secondary); color: #fff; }
+.badge-warning { background: var(--warning); color: #fff; }
+.badge-danger { background: var(--danger); color: #fff; }
+
+.btn-accent {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+.btn-accent:hover {
+  background: #1b5ce0;
+  border-color: #1b5ce0;
+  color: #fff;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.table thead th {
+  border-top: none;
+  border-bottom: 2px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.table tbody td {
+  vertical-align: middle;
+}
+
+.sidebar-nav .nav-link {
+  color: rgba(255,255,255,0.7);
+  border-radius: 4px;
+  margin: 2px 8px;
+}
+.sidebar-nav .nav-link:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+.sidebar-nav .nav-link.active {
+  color: #fff;
+  background: var(--accent-blue);
+}
+.sidebar-nav .nav-link i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.drag-handle {
+  cursor: grab;
+  user-select: none;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.sortable-ghost {
+  opacity: 0.4;
+}
+
+/* Login page */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-navy);
+}
+.login-box {
+  background: var(--surface-card);
+  padding: 32px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.alert-login {
+  background: rgba(214,69,69,0.1);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 10px 14px;
+}
+
+@media (max-width: 768px) {
+  .sidebar { position: fixed; z-index: 1050; width: 240px; height: 100vh; }
+  .main-content { margin-left: 0 !important; }
+}
