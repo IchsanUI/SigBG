@@ -19,13 +19,13 @@ Checklist ini disusun bertahap (fase demi fase) supaya bisa dikerjakan increment
 
 ## Fase 1 — Database
 
-- [ ] Buat tabel `media`
-- [ ] Buat tabel `playlists`
-- [ ] Buat tabel `playlist_items`
-- [ ] Buat tabel `schedules`
-- [ ] Buat tabel `ticker_settings`
-- [ ] Buat tabel `admin_users`
-- [ ] Buat seeder awal (1 admin user, 1 playlist default kosong)
+- [x] Buat tabel `media`
+- [x] Buat tabel `playlists`
+- [x] Buat tabel `playlist_items`
+- [x] Buat tabel `schedules`
+- [x] Buat tabel `ticker_settings`
+- [x] Buat tabel `admin_users`
+- [x] Buat seeder awal (1 admin user, 1 playlist default kosong)
 
 ---
 
